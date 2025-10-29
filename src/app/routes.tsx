@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home } from "./pages/Home";
+import Home from "../pages/Home";
 import DeckDetail from "../features/decks/DeckDetail";
 
 export const router = createBrowserRouter([

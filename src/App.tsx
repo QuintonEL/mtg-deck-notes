@@ -1,6 +1,21 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { NewNote } from "./NewNote";
 
+export type Note = {
+  id: string;
+} & NoteData;
+
+export type NoteData = {
+  title: string;
+  markdown: string;
+  tags: Tag[];
+};
+
+export type Tag = {
+  id: string;
+  label: string;
+};
+
 export default function App() {
   return (
     <div className="container mx-auto p-4">

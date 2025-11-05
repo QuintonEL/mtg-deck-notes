@@ -1,9 +1,30 @@
 import CreatableReactSelect from "react-select/creatable";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { NoteData, Tag } from "./App";
+import { useState } from "react";
 
-export function NoteForm() {
+type NoteFormProps = {
+  onSubmit: (data: NoteData) => void;
+};
+
+export function NoteForm({ onSubmit }: NoteFormProps) {
+  const titleRef = useRef<HTMLInputElement>(null);
+  const markdownRef = useRef<HTMLTextAreaElement>(null);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    onSubmit({
+      title: titleRef.current!.value,
+      markdown: markdownRef.current!.value,
+      tags: [],
+    });
+  }
+
   return (
-    <form className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label
@@ -15,6 +36,7 @@ export function NoteForm() {
           <input
             id="title"
             type="text"
+            ref={titleRef}
             required
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50"
           />
@@ -27,6 +49,15 @@ export function NoteForm() {
             Tags
           </label>
           <CreatableReactSelect
+            value={selectedTags.map((tag) => ({
+              label: tag.label,
+              value: tag.id,
+            }))}
+            onChange={(tags) => {
+              setSelectedTags(
+                tags.map((tag) => ({ label: tag.label, id: tag.value }))
+              );
+            }}
             isMulti
             unstyled
             classNames={{
@@ -81,6 +112,7 @@ export function NoteForm() {
         <textarea
           id="body"
           rows={15}
+          ref={markdownRef}
           required
           className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50"
         />

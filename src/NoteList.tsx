@@ -144,7 +144,7 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
           </div>
         </div>
       </form>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-8">
         {filteredNotes.map((note) => (
           <div key={note.id}>
             <NoteCard id={note.id} title={note.title} tags={note.tags} />
@@ -157,14 +157,28 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
 
 function NoteCard({ id, title, tags }: SimplifiedNote) {
   return (
-<Link
-  to={`/${id}`}
-  className={`block h-full rounded-xl border border-slate-200 bg-white p-6 shadow-sm 
+    <Link
+      to={`/${id}`}
+      className={`block h-full rounded-xl border border-slate-200 bg-white p-6 shadow-sm 
               text-slate-900 no-underline transition hover:-translate-y-[2px] hover:shadow-md
               focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 
               dark:bg-slate-900 dark:text-slate-100 ${styles.card}`}
->
-  {/* Card content here */}
-</Link>
+    >
+      <div className="flex flex-col items-center justify-center gap-2 h-full">
+        <span className="fs-5">{title}</span>
+        {tags.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-1">
+            {tags.map((tag) => (
+              <span
+                key={tag.id}
+                className="rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700"
+              >
+                {tag.label}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </Link>
   );
 }

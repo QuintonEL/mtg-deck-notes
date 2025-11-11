@@ -59,7 +59,10 @@ export default function App() {
   return (
     <div className="container mx-auto p-4">
       <Routes>
-        <Route path="/" element={<NoteList availableTags={tags} />} />
+        <Route
+          path="/"
+          element={<NoteList notes={notesWithTags} availableTags={tags} />}
+        />
         <Route
           path="/new"
           element={

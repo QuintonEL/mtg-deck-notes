@@ -2,11 +2,18 @@ import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ReactSelect from "react-select/creatable";
 import { useMemo, useState } from "react";
-import { Note, Tag } from "./App";
+import { Tag } from "./App";
+import styles from "./NoteList.module.css";
+
+type SimplifiedNote = {
+  tags: Tag[];
+  title: string;
+  id: string;
+};
 
 type NoteListProps = {
   availableTags: Tag[];
-  notes: Note[];
+  notes: SimplifiedNote[];
 };
 
 export function NoteList({ availableTags, notes }: NoteListProps) {
@@ -140,10 +147,24 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
         {filteredNotes.map((note) => (
           <div key={note.id}>
-            <NoteCard />
+            <NoteCard id={note.id} title={note.title} tags={note.tags} />
           </div>
         ))}
       </div>
     </>
+  );
+}
+
+function NoteCard({ id, title, tags }: SimplifiedNote) {
+  return (
+<Link
+  to={`/${id}`}
+  className={`block h-full rounded-xl border border-slate-200 bg-white p-6 shadow-sm 
+              text-slate-900 no-underline transition hover:-translate-y-[2px] hover:shadow-md
+              focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 
+              dark:bg-slate-900 dark:text-slate-100 ${styles.card}`}
+>
+  {/* Card content here */}
+</Link>
   );
 }

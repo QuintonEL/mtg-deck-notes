@@ -9,12 +9,19 @@ type NoteFormProps = {
   onSubmit: (data: NoteData) => void;
   onAddTag: (tag: Tag) => void;
   availableTags: Tag[];
-};
+} & Partial<NoteData>;
 
-export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
+export function NoteForm({
+  onSubmit,
+  onAddTag,
+  availableTags,
+  title = "",
+  markdown = "",
+  tags = [],
+}: NoteFormProps) {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
   const navigate = useNavigate();
 
   function handleSubmit(e: React.FormEvent) {
@@ -44,6 +51,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
             type="text"
             ref={titleRef}
             required
+            defaultValue={title}
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50"
           />
         </div>
@@ -126,6 +134,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps) {
         </label>
         <textarea
           id="body"
+          defaultValue={markdown}
           rows={15}
           ref={markdownRef}
           required

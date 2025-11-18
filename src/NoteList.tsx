@@ -14,11 +14,27 @@ type SimplifiedNote = {
 type NoteListProps = {
   availableTags: Tag[];
   notes: SimplifiedNote[];
+  onDeleteTag: (id: string) => void;
+  onUpdateTag: (id: string, label: string) => void;
 };
 
-export function NoteList({ availableTags, notes }: NoteListProps) {
+type EditTagsModalProps = {
+  show: boolean;
+  handleClose: () => void;
+  availableTags: Tag[];
+  onDeleteTag: (id: string) => void;
+  onUpdateTag: (id: string, label: string) => void;
+};
+
+export function NoteList({
+  availableTags,
+  notes,
+  onUpdateTag,
+  onDeleteTag,
+}: NoteListProps) {
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [title, setTitle] = useState("");
+  const [editTagsModalOpen, setEditTagsModalOpen] = useState(false);
 
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
@@ -51,6 +67,7 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
             type="button"
             className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm
                    hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={() => setEditTagsModalOpen(true)}
           >
             Edit Tags
           </button>
@@ -151,6 +168,13 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
           </div>
         ))}
       </div>
+      <EditTagsModal
+        onDeleteTag={onDeleteTag}
+        onUpdateTag={onUpdateTag}
+        show={editTagsModalOpen}
+        handleClose={() => setEditTagsModalOpen(false)}
+        availableTags={availableTags}
+      />
     </>
   );
 }
@@ -180,5 +204,43 @@ function NoteCard({ id, title, tags }: SimplifiedNote) {
         )}
       </div>
     </Link>
+  );
+}
+
+function EditTagsModal({
+  availableTags,
+  handleClose,
+  show,
+  onUpdateTag,
+  onDeleteTag,
+}: EditTagsModalProps) {
+  if (!show) return null; // modal hidden
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* backdrop */}
+      <div className="absolute inset-0 bg-black/50" onClick={handleClose} />
+
+      {/* modal */}
+      <div className="relative bg-white rounded-lg shadow-lg p-6 z-10 space-y-4">
+        {availableTags.map((tag) => (
+          <div key={tag.id} className="flex items-center gap-3">
+            <input
+              type="text"
+              value={tag.label}
+              className="flex-1 rounded border border-gray-300 px-3 py-2
+                   focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <button
+              className="px-3 py-2 border border-red-500 text-red-500 rounded
+                         hover:bg-red-500 hover:text-white transition"
+            >
+              &times;
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

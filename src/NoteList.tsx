@@ -228,11 +228,13 @@ function EditTagsModal({
             <input
               type="text"
               value={tag.label}
+              onChange={(e) => onUpdateTag(tag.id, e.target.value)}
               className="flex-1 rounded border border-gray-300 px-3 py-2
                    focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
             <button
+              onClick={() => onDeleteTag(tag.id)}
               className="px-3 py-2 border border-red-500 text-red-500 rounded
                          hover:bg-red-500 hover:text-white transition"
             >

@@ -6,7 +6,6 @@ body,
   height: 100%;
 }
 body {
-  background-color: theme("colors.slate.100");
-  color: theme("colors.slate.900");
+  background-color: #c6fad2;
+  color: #f48882;
 }
-

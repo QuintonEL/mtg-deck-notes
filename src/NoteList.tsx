@@ -88,7 +88,7 @@ export function NoteList({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50"
+              className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50 bg-[#dd9bcf]"
             />
           </div>
           <div>
@@ -122,7 +122,7 @@ export function NoteList({
                 // outer control (the "input" shell)
                 control: (state) =>
                   [
-                    "mt-1 w-full rounded-md border text-sm shadow-sm",
+                    "mt-1 w-full rounded-md border text-sm shadow-sm bg-[#dd9bcf]",
                     state.isFocused
                       ? "border-blue-500 ring-2 ring-blue-500/50"
                       : "border-slate-300",
@@ -142,6 +142,8 @@ export function NoteList({
 
                 // dropdown menu
                 menu: () => "mt-1 border border-slate-200 rounded-md shadow-lg",
+                // menu list (inside menu)
+                menuList: () => "bg-white",
                 option: (state) =>
                   `cursor-pointer px-3 py-2 ${
                     state.isSelected

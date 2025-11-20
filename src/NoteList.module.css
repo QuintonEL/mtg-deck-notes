@@ -1,5 +1,6 @@
 .card {
   transition: translate ease-in-out 10ms, box-shadow ease-in-out 10ms;
+  background-color: #fad2cc;
 }
 
 .card:hover,

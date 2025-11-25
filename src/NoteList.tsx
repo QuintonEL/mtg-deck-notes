@@ -57,7 +57,7 @@ export function NoteList({
         <div className="flex items-center gap-2">
           <Link to="/new">
             <button
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm
+              className="rounded-md bg-[#2A52BE] px-4 py-2 text-sm font-medium text-white shadow-sm
                    hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Create
@@ -65,7 +65,7 @@ export function NoteList({
           </Link>
           <button
             type="button"
-            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm
+            className="rounded-md bg-[#2A52BE] px-4 py-2 text-sm font-medium text-white shadow-sm
                    hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             onClick={() => setEditTagsModalOpen(true)}
           >
@@ -88,7 +88,7 @@ export function NoteList({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50 bg-[#dd9bcf]"
+              className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50 bg-white"
             />
           </div>
           <div>
@@ -122,7 +122,7 @@ export function NoteList({
                 // outer control (the "input" shell)
                 control: (state) =>
                   [
-                    "mt-1 w-full rounded-md border text-sm shadow-sm bg-[#dd9bcf]",
+                    "mt-1 w-full rounded-md border text-sm shadow-sm bg-white",
                     state.isFocused
                       ? "border-blue-500 ring-2 ring-blue-500/50"
                       : "border-slate-300",

@@ -58,7 +58,9 @@ export function Note({ onDelete }: NoteProps) {
           </Link>
         </div>
       </div>
-      <ReactMarkdown>{note.markdown}</ReactMarkdown>
+      <div className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500/50">
+        <ReactMarkdown>{note.markdown}</ReactMarkdown>
+      </div>
     </>
   );
 }

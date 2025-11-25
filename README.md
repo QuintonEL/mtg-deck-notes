@@ -1,3 +1,8 @@
+## A dynamic note-taking app with tags and filtering. Taken from Web Dev Simplified on Youtube.
+![Main Page](URL_of_your_hosted_image)
+![Main Page](URL_of_your_hosted_image)
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
